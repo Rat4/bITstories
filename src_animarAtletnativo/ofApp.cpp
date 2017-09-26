@@ -3,51 +3,42 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
 
+
+	/*for(int i=0;i<=7;i++){
+	ofImage c;
+	c=a.imgBuffer("Pies/Pies",a.imgStamp(5,'0',i,7,true,"png"));
+	v.push_back(c);
+	cout<<"stamp reviwe"<<endl;
+	cout<<a.imgStamp(5,'0',i,7,true,"png")<<endl;
+}*/
+
+	ofBackground(255,50,100);
+
+scale=0.3;
+	a.imgFormat(5,'0',"Pies/sinFondo/Pies","png");
+	v=	a.imgVector(0,7);
+
+
+
+
+
+
+	cout<<"vector size:"<<endl;
+	cout<<v.size()<<endl;
+
+	 w=v[0].getWidth();
+	 h=v[0].getHeight();
+	 sW=w*scale;
+	 sH=h*scale;
+	 for (unsigned int i = 0; i < v.size(); ++i)
+	 {
+	 	v[i].resize(sW,sH);
+	 }
+	 cout<<w<<endl;
+	cout<<h<<endl;
+	cout<<v[0].getWidth()<<endl;
+	cout<<v[0].getHeight()<<endl;
 	
-	dirName="despiece_4/cuerpo/cuerpo_luz/sinFondo";
-	//secuencia.push_back(loadImage("cuerpo_luz"+ numImage + ".png")); 
-	directorio.listDir(dirName);
-	directorio.sort();
-
-
-	secuencia.resize(directorio.size());
-    	for(int i = 0; i < directorio.size(); ++i) {
-
-        cargadorImagenes.loadFromDisk(secuencia[i],directorio.getPath(i));
-        //imprime todos los path de las fotos y el numero de fotos
-        // en el directorio
-        //ofLogNotice(directorio.getPath(i));
-        cout<<"numero de fototos"<< "\t"<< directorio.getPath(i)<<endl;
-     
-	}
-
-	bFrameindependiente=true;
-
-	appfps=60;
-	secuencefps=24;
-	ofSetFrameRate(appfps);
-
-
-
-	//escalar
-
-	 w=1920;
- h=1080;
- scale=0.5;
-
- scaleW=w*scale;
- scaleH=h*scale;
-
-cout<< w<<h<<endl;
-
-
-for (int i = 0; i < secuencia.size(); ++i)
-{
-	secuencia.get().at(i).resize(scaleW,scaleH);
-
-}
-
-
 
 
 
@@ -55,32 +46,24 @@ for (int i = 0; i < secuencia.size(); ++i)
 
 //--------------------------------------------------------------
 void ofApp::update(){
-	
-	
-	
-    if(bFrameindependiente){
 
-        // calcula el tiempo del frame basado en el tiempo de la app
-        // y del tiempo deseado para la secuencia
-        frameindex = (int)(ofGetElapsedTimef() * secuencefps) % secuencia.size();
-    }
-    else {
-        // calcula el frame basado en el conteo de frames de la app
-        frameindex = ofGetFrameNum() % secuencia.size();
-    }
+	frames = ofGetFrameNum() % v.size();
+	mapeaMouse = ofMap(ofGetMouseX(), 0, ofGetWidth() -1, 1, 30);
+
+	
+
+	ofSetFrameRate(mapeaMouse);
 
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-
-	secuencia[frameindex].draw(0,0);
-
+	
+	v[frames].draw(0,0);
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-
 
 }
 

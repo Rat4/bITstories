@@ -1,7 +1,7 @@
 #pragma once
 
 #include "ofMain.h"
-#include "ofxThreadedImageLoader.h"
+#include"imageStuff.h"
 
 class ofApp : public ofBaseApp{
 
@@ -21,19 +21,10 @@ class ofApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
-
-		ofxThreadedImageLoader cargadorImagenes;
-		ofDirectory directorio;
-
-		std::vector<ofImage> secuencia;
-
-		string dirName;
-
-		int frameindex;
+		imageStuff a;
+		std::vector<ofImage> v;
+		int frames;
+		int mapeaMouse;
 		
-		int appfps,secuencefps;
-		bool bFrameindependiente;
-		float scale, w, h, scaleW,scaleH;
-
-		
+		float w,h,sW,sH,scale;
 };
